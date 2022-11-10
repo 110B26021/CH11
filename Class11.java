@@ -1,65 +1,56 @@
 interface Data
- {
- public void best(); // 判斷那一科成績較高
- public void failed(); // 判斷那一科成績低於 60 分
- }
- interface Test extends Data
- {
- public void showData(); // 顯示學生的資料及平均成績
- public double average(); // 計算數學和英文的平均成績
- }
- class CStu implements Test
- {
+{
+public void showData();
+}
+interface Test
+{
+public void showScore();
+public double calcu();
+}
+class CStu implements Data,Test
+{
+ protected String id; // 學號
  protected String name; // 姓名
- protected int math; // 數學成績
- protected int english; // 英文成績
- public CStu(String s,int m,int eng)
- {
- name=s;
- math=m;
- english=eng;
+ protected int mid; // 期中考成績
+ protected int finl; // 期末考成績
+ protected int common; // 平時成績
+
+ public CStu(String s1,String s2,int m,int f,int c)
+{
+ id=s1;
+ name=s2;
+ mid=m;
+ finl=f;
+ common=c;
  }
  public void show()
  {
  showData();
- best();
- failed();
+ showScore();
+ }
+ public void showScore()
+ {
+ System.out.println("期中考成績:"+mid);
+ System.out.println("期末考成績:"+finl);
+ System.out.println("平時成績:"+common);
+ System.out.println("學期成績:"+calcu());
  }
  public void showData()
  {
+ System.out.println("學號:"+id);
  System.out.println("姓名:"+name);
- System.out.println("數學成績:"+math);
- System.out.println("英文成績:"+english);
- System.out.println("平均成績:"+average());
  }
- public void best()
+ public double calcu()
  {
- if(math>english)
- System.out.println(name+"的數學比英文好");
- else if(math<english)
- System.out.println(name+"的英文比數學好");
- else
- System.out.println(name+"的數學和英文一樣好");
- }
- public void failed()
- {
- if(math<60)
- System.out.println(name+"的數學當掉了");
- if(english<60)
- System.out.println(name+"的英文當掉了");
- if(math>=60 && english>=60)
- System.out.println(name+"的數學和英文都及格");
- }
- public double average()
- {
- return (math+english)/2.0;
+ return (mid*0.3+finl*0.3+common*0.4);
  }
  }
- public class hw11_12
+ 
+ public class hw11_11
  {
  public static void main(String args[])
  {
- CStu stu=new CStu("Judy",58,91);
+ CStu stu=new CStu("940001","Fiona",90,92,85);
  stu.show();
  }
- }
+ } 
